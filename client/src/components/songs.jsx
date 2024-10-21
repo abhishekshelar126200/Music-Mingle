@@ -43,28 +43,27 @@ function Songs() {
                 details.isSet=true
     
                 console.log(details)
-           }
-           
-           localStorage.setItem('details',JSON.stringify(details))
-           setSongs(JSON.parse(localStorage.getItem('songs')) || []);
-
-            if (songs.length > 0) {
-            localStorage.setItem('currentSong', localStorage.getItem('currentSong') || songs[0].name);
-            localStorage.setItem('artist', localStorage.getItem('artist') || songs[0].artists[0].name);
-            localStorage.setItem('image1', localStorage.getItem('image1') || songs[0].album.images[0].url);
-            localStorage.setItem('song_url', localStorage.getItem('song_url') || songs[0].preview_url);
-
-            setName(localStorage.getItem('currentSong'));
-            setArtistName1(localStorage.getItem('artist'));
-            setImage(localStorage.getItem('image1'));
-            setSong(localStorage.getItem('song_url'));
-        }
-           if(localStorage.getItem('details'))
-            {
-                setDetails(JSON.parse(localStorage.getItem('details')))
+               localStorage.setItem('details',JSON.stringify(details))
+               setSongs(JSON.parse(localStorage.getItem('songs')) || []);
+    
+                if (convertedResponse.tracks.items.length > 0) {
+                localStorage.setItem('currentSong', localStorage.getItem('currentSong') || convertedResponse.tracks.items[0].name);
+                localStorage.setItem('artist', localStorage.getItem('artist') || convertedResponse.tracks.items[0].artists[0].name);
+                localStorage.setItem('image1', localStorage.getItem('image1') || convertedResponse.tracks.items[0].album.images[0].url);
+                localStorage.setItem('song_url', localStorage.getItem('song_url') || convertedResponse.tracks.items[0].preview_url);
+    
+                setName(convertedResponse.tracks.items[0].name);
+                setArtistName1(convertedResponse.tracks.items[0].artists[0].name);
+                setImage(convertedResponse.tracks.items[0].album.images[0].url);
+                setSong(convertedResponse.tracks.items[0].preview_url);
             }
-            
-          }
+               if(localStorage.getItem('details'))
+                {
+                    setDetails(JSON.parse(localStorage.getItem('details')))
+                }
+                
+              }
+           }
     
           playMusic()
     },[])
